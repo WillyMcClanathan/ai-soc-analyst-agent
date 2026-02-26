@@ -59,17 +59,17 @@ This project demonstrates practical SOC automation techniques and detection engi
 
 
  Log Files
- ↓
+ ->
  Parsers
- ↓
+ ->
  Detection Rules
- ↓
+ ->
  Alerts
- ↓
+ ->
  Incident Creation & Correlation
- ↓
+ ->
  Agent Zero AI Analysis
- ↓
+ ->
  Web Dashboard / Reports
 
 
