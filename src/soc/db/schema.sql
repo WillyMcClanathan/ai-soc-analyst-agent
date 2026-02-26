@@ -41,6 +41,25 @@ CREATE TABLE IF NOT EXISTS incidents (
   status TEXT NOT NULL DEFAULT 'New',
   severity INTEGER NOT NULL,
   primary_ip TEXT,
-  summary TEXT
-  source_alert_id INTEGER UNIQUE,
+  summary TEXT,
+  source_alert_id INTEGER UNIQUE
 );
+
+-- Agent Zero run history (per-incident)
+CREATE TABLE IF NOT EXISTS agent_runs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  incident_key TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  status TEXT NOT NULL DEFAULT 'queued',   -- queued|exported|completed|failed
+  model TEXT DEFAULT 'agentzero',
+  requested_by TEXT DEFAULT 'analyst',
+
+  analyst_prompt TEXT,
+  export_path TEXT,
+  output_path TEXT,
+  error TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_agent_runs_incident_key_created
+ON agent_runs (incident_key, created_at DESC);
